@@ -5,6 +5,7 @@ import seaborn as sns
 from utils.data_loader import load_dataset
 from utils.model_utils import load_ml_assets, generate_shap_plot
 from utils.markov_sim import simulate_match
+import os
 
 st.set_page_config(
     page_title="Pickleball Analytics",
@@ -12,9 +13,11 @@ st.set_page_config(
     layout="wide"
 )
 
-DATA_PATH = "data/matches_complete7.0.csv"
-MODEL_PATH = "models/xgb_model.pkl"
-SCALER_PATH = "models/scaler.pkl"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+DATA_PATH = os.path.join(BASE_DIR, "data", "matches_complete7.0.csv")
+MODEL_PATH = os.path.join(BASE_DIR, "models", "xgb_model.pkl")
+SCALER_PATH = os.path.join(BASE_DIR, "models", "scaler.pkl")
 
 match_data = load_dataset(DATA_PATH)
 xgb_classifier, feature_scaler = load_ml_assets(MODEL_PATH, SCALER_PATH)
