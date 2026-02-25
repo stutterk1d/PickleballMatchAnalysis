@@ -46,17 +46,14 @@ elif app_mode == 'Model Prediction':
     with col1:
         st.subheader("Team A")
         a_dupr = st.number_input("Average DUPR", value=5.5, key="a_dupr")
-        a_weak = st.number_input("Minimum DUPR", value=5.0, key="a_weak")
         a_drive = st.slider("Drive Percentage", 0.0, 1.0, 0.5, key="a_drive")
         a_cons = st.slider("Consistency", 0.0, 1.0, 0.8, key="a_cons")
         a_net = st.slider("Net Efficiency", -1.0, 1.0, 0.2, key="a_net")
-        a_d_n_syn = st.number_input("Driver Net Synergy", value=0.1, key="a_d_n_syn")
         a_dupr_syn = st.number_input("DUPR Synergy", value=25.0, key="a_dupr_syn")
 
     with col2:
         st.subheader("Team B")
         b_dupr = st.number_input("Average DUPR", value=5.5, key="b_dupr")
-        b_weak = st.number_input("Minimum DUPR", value=5.0, key="b_weak")
         b_drive = st.slider("Drive Percentage", 0.0, 1.0, 0.5, key="b_drive")
         b_cons = st.slider("Consistency", 0.0, 1.0, 0.8, key="b_cons")
         b_net = st.slider("Net Efficiency", -1.0, 1.0, 0.2, key="b_net")
@@ -66,16 +63,14 @@ elif app_mode == 'Model Prediction':
     if st.button("Calculate Match Outcome"):
         features = [
             a_dupr - b_dupr,
-            a_weak - b_weak,
             a_cons - b_cons,
             a_net - b_net,
             a_drive - b_drive,
-            a_d_n_syn,
             b_d_n_syn,
             a_dupr_syn,
             b_dupr_syn
         ]
-        cols = ['DUPR_Diff', 'Weak_Link_Diff', 'Consistency_Diff', 'Net_Efficiency_Diff', 'Drive_Diff', 'TeamA_Driver_Net_Synergy', 'TeamB_Driver_Net_Synergy', 'TeamA_DUPR_Synergy', 'TeamB_DUPR_Synergy']
+        cols = ['DUPR_Diff', 'Consistency_Diff', 'Net_Efficiency_Diff', 'Drive_Diff', 'TeamB_Driver_Net_Synergy', 'TeamA_DUPR_Synergy', 'TeamB_DUPR_Synergy']
         input_df = pd.DataFrame([features], columns=cols)
 
         scaled_input = feature_scaler.transform(input_df)
