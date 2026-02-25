@@ -32,7 +32,7 @@ app_mode = st.sidebar.radio(
 
 if app_mode == 'Data Explorer':
     st.header("Data Explorer")
-    st.dataframe(player_data.head(100), use_container_width=True)
+    st.dataframe(match_data.head(1000), use_container_width=True)
 
     if 'PCA1' in player_data.columns and 'PCA2' in player_data.columns and 'Playstyle_Cluster' in player_data.columns:
         fig, ax = plt.subplots(figsize=(10, 6))
