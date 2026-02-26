@@ -45,7 +45,6 @@ elif app_mode == 'Model Prediction':
     st.header("Model Prediction")
     col1, col2 = st.columns(2)
     
-    # Map descriptive names to your model's cluster IDs
     style_map = {
         "Banger": "Cluster_0", 
         "Dinker": "Cluster_1", 
@@ -61,23 +60,22 @@ elif app_mode == 'Model Prediction':
         a_drive = st.slider("Drive Percentage", 0.0, 1.0, 0.5, key="a_drive", help="Percentage of 3rd shots hit as fast drives instead of soft drops.")
         a_cons = st.slider("Consistency", 0.0, 1.0, 0.8, key="a_cons", help="The rate at which the team keeps the ball in play without committing unforced errors.")
         a_net = st.slider("Net Efficiency", -1.0, 1.0, 0.2, key="a_net", help="How well the team wins points when positioned at the non-volley zone line.")
+        a_d_n_syn = st.number_input("Driver Net Synergy", value=0.1, key="a_d_n_syn", help="Measures the effectiveness of pairing an aggressive driver with a strong net player.")
         a_dupr_syn = st.number_input("DUPR Synergy", value=25.0, key="a_dupr_syn", help="A calculated score showing how well the two players' ratings complement each other.")
 
     with col2:
         st.subheader("Team B")
-        b_dupr = st.number_input("Average DUPR", value=5.5, key="b_dupr")
+        b_dupr = st.number_input("Average DUPR", value=5.5, key="b_dupr", help="The combined average player rating for the team.")
         b_p1_display = st.selectbox("Player 1 Playstyle", display_options, key="b_p1_style")
         b_p2_display = st.selectbox("Player 2 Playstyle", display_options, key="b_p2_style")
-        b_drive = st.slider("Drive Percentage", 0.0, 1.0, 0.5, key="b_drive")
-        b_cons = st.slider("Consistency", 0.0, 1.0, 0.8, key="b_cons")
-        b_net = st.slider("Net Efficiency", -1.0, 1.0, 0.2, key="b_net")
+        b_drive = st.slider("Drive Percentage", 0.0, 1.0, 0.5, key="b_drive", help="Percentage of 3rd shots hit as fast drives instead of soft drops.")
+        b_cons = st.slider("Consistency", 0.0, 1.0, 0.8, key="b_cons", help="The rate at which the team keeps the ball in play without committing unforced errors.")
+        b_net = st.slider("Net Efficiency", -1.0, 1.0, 0.2, key="b_net", help="How well the team wins points when positioned at the non-volley zone line.")
         b_d_n_syn = st.number_input("Driver Net Synergy", value=0.1, key="b_d_n_syn", help="Measures the effectiveness of pairing an aggressive driver with a strong net player.")
-        b_dupr_syn = st.number_input("DUPR Synergy", value=25.0, key="b_dupr_syn")
-
+        b_dupr_syn = st.number_input("DUPR Synergy", value=25.0, key="b_dupr_syn", help="A calculated score showing how well the two players' ratings complement each other.")
     if st.button("Calculate Match Outcome"):
         base_cols = ['DUPR_Diff', 'Consistency_Diff', 'Net_Efficiency_Diff', 'Drive_Diff', 'TeamB_Driver_Net_Synergy', 'TeamA_DUPR_Synergy', 'TeamB_DUPR_Synergy']
         
-        # Define the exact columns your model expects
         cluster_options = ['Cluster_0', 'Cluster_1', 'Cluster_2']
         players = ['TeamAPlayer1', 'TeamAPlayer2', 'TeamBPlayer1', 'TeamBPlayer2']
         playstyle_cols = [f"{p}_Playstyle_{c}" for p in players for c in cluster_options]
