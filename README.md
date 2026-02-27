@@ -1,6 +1,6 @@
 # Pickleball Match Analysis
 
-This repository holds a data science project for predicting pickleball match outcomes. You can find the code to scrape, clean, analyze, and model pickleball data here. I built a machine learning pipeline using XGBoost and K-Means clustering to classify different players. You can also run a Streamlit application to interact with the findings. 
+This repository is a data science project for predicting pickleball match outcomes. You can find the code to scrape, clean, analyze, and model pickleball data here. I built a machine learning pipeline using XGBoost and K-Means clustering to classify different players. You can also run a Streamlit application to interact with the findings. 
 
 ## Project Structure
 
